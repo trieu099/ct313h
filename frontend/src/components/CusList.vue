@@ -1,7 +1,7 @@
 <script>
 export default {
   props: {
-    books: { type: Array, default: () => [] },
+    cuss: { type: Array, default: () => [] },
     activeIndex: { type: Number, default: -1 },
   },
   emits: ["update:activeIndex"],
@@ -16,12 +16,12 @@ export default {
   <ul class="list-group">
     <li
       class="list-group-item"
-      v-for="(book, index) in books"
-      :key="book.bookNo"
+      v-for="(cus, index) in cuss"
+      :key="cus.listId"
       :class="{ active: index === activeIndex }"
       @click="updateActiveIndex(index)">
     
-     {{book.bookCode}} - {{ book.bookName}} 
+      {{cus.listId}} -- {{cus.cusName}} -- {{cus.bookCode}}
     </li>
   </ul>
 </template>

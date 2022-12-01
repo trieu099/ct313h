@@ -3,7 +3,7 @@ export default {
   props: {
     modelValue: { type: String, default: '' },
   },
-  emits: ['submit', 'update:modelValu'],
+  emits: ['submit', 'update:modelValue'],
   methods: {
     updateModelValue(e) {
       this.$emit('update:modelValue', e.target.value);
@@ -19,14 +19,14 @@ export default {
     <input
       type="text"
       class="form-control"
-      placeholder="Nhập thông tin cần tìm"
+      placeholder="Nhập sách cần tìm"
       :value="modelValue"
       @input="updateModelValue"
       @keyup.enter="submit"
     />
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="button" @click="submit">
-        <i class="fas fa-search" /> Tìm kiếm
+        <i class="fa-fa-search" /> Tìm kiếm
       </button>
     </div>
   </div>

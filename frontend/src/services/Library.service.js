@@ -3,7 +3,7 @@ const url = import.meta.env.VITE_APP_API_URL;
 
 class LibraryService {
     constructor() {
-        this.baseUrl = `${url}/api/library`;
+        this.baseUrl = `${url}/api/books`;
         this.api = axios.create({
             headers: {
                 'Content-Type': 'application/json',
@@ -14,20 +14,25 @@ class LibraryService {
     async getMany() {
         return (await this.api.get(this.baseUrl)).data;
     }
-    async create(library) {
-        return (await this.api.post(this.baseUrl, library)).data;
+    async create(book) {
+        return (await this.api.post(this.baseUrl, book)).data;
     }
     async deleteMany() {
         return (await this.api.delete(this.baseUrl)).data;
     }
-    async get(id) {
-        return (await this.api.get(`${this.baseUrl}/${id}`)).data;
+    async get(bookCode) {
+        return (await this.api.get(`${this.baseUrl}/${bookCode}`)).data;
     }
-    async update(id, library) {
-        return (await this.api.put(`${this.baseUrl}/${id}`, library)).data;
+    async update(bookCode, book) {
+        return (await this.api.put(`${this.baseUrl}/${bookCode}`, book)).data;
     }
-    async delete(id) {
-        return (await this.api.delete(`${this.baseUrl}/${id}`)).data;
+    async delete(bookCode) {
+        return (await this.api.delete(`${this.baseUrl}/${bookCode}`)).data;
+    }
+    async findById(bookCode) {
+        return await this.books.where('bookCode', bookCode).select('*')
+        // .first()
+        ;
     }
 }
 

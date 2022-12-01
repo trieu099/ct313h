@@ -11,6 +11,10 @@
     </nav>
 </template>
 <style> 
+.narbar{
+  width: 1366px;
+  margin: 0px;
+}
 nav{
   background-color: #6ECCAF;
    

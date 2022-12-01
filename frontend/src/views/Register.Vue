@@ -1,37 +1,43 @@
 <template>
-  <div class="vue-tempalte">
-      <form>
-          <h3>Sign Up</h3>
-
-          <div class="form-group">
-              <label>Full Name</label>
-              <input type="text" class="form-control form-control-lg"/>
-          </div>
-
-          <div class="form-group">
-              <label>User name</label>
-              <input type="username" class="form-control form-control-lg" />
-          </div>
-
-          <div class="form-group">
-              <label>Password</label>
-              <input type="password" class="form-control form-control-lg" />
-          </div>
-
-          <button type="submit" class="btn btn-dark btn-lg btn-block">Sign Up</button>
-
-          <p class="forgot-password text-right">
-              Already registered 
-              <router-link :to="{name: 'login'}">sign in?</router-link>
-          </p>
-      </form>
-  </div>
-</template>
-
-<script>
+    <div class="page">
+      <h4>Thêm tài khoản quản trị viên</h4>
+      <AccForm :acc="acc" @submit:acc="onUpdateAcc" />
+      <p>{{ message }}</p>
+    </div>
+  </template>
+  <script>
+  import AccForm from "@/components/AccForm.vue";
+  import { accountService } from "@/services/account.service";
   export default {
-      data() {
-          return {}
-      }
-  }
-</script>
+    components: {
+      AccForm,
+    },
+    props: {
+      accUsername: { type: Text, required: false },
+    },
+    data() {
+      return {
+        book: null,
+        message: "",
+      };
+    },
+    methods: {
+      async onUpdateAcc(acc) {
+        try {
+          await accountService.create(acc);
+          this.message = "Thêm tài khoản.";
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    },
+    created() {
+      this.acc = {
+        accId: "",
+        accUsername: "",
+        accPassword: "",
+      };
+      this.message = "";
+    },
+  };
+  </script>
